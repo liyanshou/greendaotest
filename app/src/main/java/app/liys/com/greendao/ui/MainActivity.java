@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Toast;
 
 import com.liys.com.gen.User;
 import com.liys.com.gen.UserDao;
@@ -25,9 +27,17 @@ public class MainActivity extends AppCompatActivity {
         recyclerView =findViewById(R.id.listview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false));
         RecycleAdapter recycleAdapter = new RecycleAdapter(this);
+        recycleAdapter.setOnItemClickListener(new RecycleAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(MainActivity.this, "位置"+position, Toast.LENGTH_SHORT).show();
+            }
+        });
         recyclerView.setAdapter(recycleAdapter);
 
         UserDao userDao = DaoManager.getInstance().getDaoSession().getUserDao();
+
+        userDao.deleteAll();
         for(int i= 0;i<10;i++){
             userDao.insert(new User((long) i,"小屁孩",i+"岁"));
         }

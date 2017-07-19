@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.liys.com.gen.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import app.liys.com.greendao.R;
@@ -18,9 +19,9 @@ import app.liys.com.greendao.R;
  * @time 2017-07-19.
  */
 
-public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.CommViewHolder> {
+public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.CommViewHolder> implements View.OnClickListener {
     private Context context;
-    private List<User> datas;
+    private List<User> datas = new ArrayList<User>();
     public RecycleAdapter(Context context, List<User> datas) {
         this.context = context;
         this.datas = datas;
@@ -30,15 +31,22 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.CommView
     }
     @Override
     public CommViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        CommViewHolder commViewHolder = new CommViewHolder(LayoutInflater.from(context).inflate(R.layout.adapter_item_layout, null));
-
+        View view = LayoutInflater.from(context).inflate(R.layout.adapter_item_layout, null);
+        CommViewHolder commViewHolder = new CommViewHolder(view);
+        view.setOnClickListener(this);
         return commViewHolder;
     }
 
     @Override
     public void onBindViewHolder(CommViewHolder holder, int position) {
+        holder.itemView.setTag(position);
         holder.tvName.setText(datas.get(position).getName());
         holder.tvNum.setText(datas.get(position).getStuNum()+"");
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
     }
 
     @Override
@@ -50,12 +58,20 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.CommView
         }
     }
     public void setDatas(List<User> datas){
-        if(datas != null){
+        if(this.datas.size() >0){
             this.datas.clear();
         }
         this.datas = datas;
         notifyDataSetChanged();
     }
+
+    @Override
+    public void onClick(View view) {
+        if(onItemClickListener != null){
+            onItemClickListener.onItemClick(view, (Integer) view.getTag());
+        }
+    }
+
     public class CommViewHolder extends RecyclerView.ViewHolder {
         TextView tvName,tvNum;
 
@@ -64,5 +80,14 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.CommView
             tvName = itemView.findViewById(R.id.tv_name);
             tvNum = itemView.findViewById(R.id.tv_num);
         }
+    }
+    private OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public  interface OnItemClickListener {
+        void onItemClick(View view , int position);
     }
 }
