@@ -38,6 +38,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.CommView
     @Override
     public void onBindViewHolder(CommViewHolder holder, int position) {
         holder.tvName.setText(datas.get(position).getName());
+        holder.tvNum.setText(datas.get(position).getStuNum()+"");
     }
 
     @Override
@@ -49,7 +50,9 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.CommView
         }
     }
     public void setDatas(List<User> datas){
-        this.datas.clear();
+        if(datas != null){
+            this.datas.clear();
+        }
         this.datas = datas;
         notifyDataSetChanged();
     }

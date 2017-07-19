@@ -1,9 +1,8 @@
 package com.liys.com.gen;
 
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Property;
 
 /**
  * Created by liys
@@ -11,7 +10,6 @@ import org.greenrobot.greendao.annotation.Generated;
  */
 @Entity
 public class User {
-    @Id(autoincrement = false)
     @Property(nameInDb = "STUNUM")
     private Long stuNum;
     @Property(nameInDb = "NAME")

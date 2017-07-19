@@ -13,7 +13,7 @@ import org.greenrobot.greendao.database.DatabaseStatement;
 /** 
  * DAO for table "USER".
 */
-public class UserDao extends AbstractDao<User, Long> {
+public class UserDao extends AbstractDao<User, Void> {
 
     public static final String TABLENAME = "USER";
 
@@ -22,7 +22,7 @@ public class UserDao extends AbstractDao<User, Long> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property StuNum = new Property(0, Long.class, "stuNum", true, "STUNUM");
+        public final static Property StuNum = new Property(0, Long.class, "stuNum", false, "STUNUM");
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
         public final static Property Age = new Property(2, String.class, "age", false, "AGE");
     }
@@ -40,7 +40,7 @@ public class UserDao extends AbstractDao<User, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"USER\" (" + //
-                "\"STUNUM\" INTEGER PRIMARY KEY ," + // 0: stuNum
+                "\"STUNUM\" INTEGER," + // 0: stuNum
                 "\"NAME\" TEXT," + // 1: name
                 "\"AGE\" TEXT);"); // 2: age
     }
@@ -92,8 +92,8 @@ public class UserDao extends AbstractDao<User, Long> {
     }
 
     @Override
-    public Long readKey(Cursor cursor, int offset) {
-        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
+    public Void readKey(Cursor cursor, int offset) {
+        return null;
     }    
 
     @Override
@@ -114,23 +114,20 @@ public class UserDao extends AbstractDao<User, Long> {
      }
     
     @Override
-    protected final Long updateKeyAfterInsert(User entity, long rowId) {
-        entity.setStuNum(rowId);
-        return rowId;
+    protected final Void updateKeyAfterInsert(User entity, long rowId) {
+        // Unsupported or missing PK type
+        return null;
     }
     
     @Override
-    public Long getKey(User entity) {
-        if(entity != null) {
-            return entity.getStuNum();
-        } else {
-            return null;
-        }
+    public Void getKey(User entity) {
+        return null;
     }
 
     @Override
     public boolean hasKey(User entity) {
-        return entity.getStuNum() != null;
+        // TODO
+        return false;
     }
 
     @Override

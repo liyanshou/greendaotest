@@ -22,6 +22,9 @@ android {
       daoPackage 'com.liys.com.gen'
       targetGenDir 'src/main/java'
   }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
