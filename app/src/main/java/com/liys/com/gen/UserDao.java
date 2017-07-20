@@ -25,6 +25,7 @@ public class UserDao extends AbstractDao<User, Long> {
         public final static Property StuNum = new Property(0, Long.class, "stuNum", true, "STUNUM");
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
         public final static Property Age = new Property(2, String.class, "age", false, "AGE");
+        public final static Property Is_stu = new Property(3, boolean.class, "is_stu", false, "is_stu");
     }
 
 
@@ -42,7 +43,8 @@ public class UserDao extends AbstractDao<User, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"USER\" (" + //
                 "\"STUNUM\" INTEGER PRIMARY KEY ," + // 0: stuNum
                 "\"NAME\" TEXT," + // 1: name
-                "\"AGE\" TEXT);"); // 2: age
+                "\"AGE\" TEXT," + // 2: age
+                "\"is_stu\" INTEGER NOT NULL );"); // 3: is_stu
     }
 
     /** Drops the underlying database table. */
@@ -69,6 +71,7 @@ public class UserDao extends AbstractDao<User, Long> {
         if (age != null) {
             stmt.bindString(3, age);
         }
+        stmt.bindLong(4, entity.getIs_stu() ? 1L: 0L);
     }
 
     @Override
@@ -89,6 +92,7 @@ public class UserDao extends AbstractDao<User, Long> {
         if (age != null) {
             stmt.bindString(3, age);
         }
+        stmt.bindLong(4, entity.getIs_stu() ? 1L: 0L);
     }
 
     @Override
@@ -101,7 +105,8 @@ public class UserDao extends AbstractDao<User, Long> {
         User entity = new User( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // stuNum
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2) // age
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // age
+            cursor.getShort(offset + 3) != 0 // is_stu
         );
         return entity;
     }
@@ -111,6 +116,7 @@ public class UserDao extends AbstractDao<User, Long> {
         entity.setStuNum(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setAge(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setIs_stu(cursor.getShort(offset + 3) != 0);
      }
     
     @Override

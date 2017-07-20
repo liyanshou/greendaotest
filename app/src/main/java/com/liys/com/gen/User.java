@@ -18,11 +18,14 @@ public class User {
     private String name;
     @Property(nameInDb = "AGE")
     private String age;
-    @Generated(hash = 1513287994)
-    public User(Long stuNum, String name, String age) {
+    @Property(nameInDb = "is_stu")
+    private boolean is_stu;
+    @Generated(hash = 896627924)
+    public User(Long stuNum, String name, String age, boolean is_stu) {
         this.stuNum = stuNum;
         this.name = name;
         this.age = age;
+        this.is_stu = is_stu;
     }
     @Generated(hash = 586692638)
     public User() {
@@ -44,5 +47,11 @@ public class User {
     }
     public void setAge(String age) {
         this.age = age;
+    }
+    public boolean getIs_stu() {
+        return this.is_stu;
+    }
+    public void setIs_stu(boolean is_stu) {
+        this.is_stu = is_stu;
     }
 }

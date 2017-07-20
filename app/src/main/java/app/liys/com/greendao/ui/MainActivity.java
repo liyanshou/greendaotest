@@ -91,10 +91,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         userDao.deleteAll();
         for(int i= 0;i<10;i++){
-            userDao.insert(new User((long) i,"小屁孩",i+"岁"));
+            userDao.insert(new User((long) i,"小屁孩",i+"岁",false));
         }
         for(int i= 10;i<20;i++){
-            userDao.insert(new User((long) i,"小皮妞",i+"岁"));
+            userDao.insert(new User((long) i,"小皮妞",i+"岁",false));
         }
         setData();
     }
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.button:
                 String string = input.getText().toString();
-                userDao.insertOrReplace(new User((long) 111,string,111+"岁"));
+                userDao.insertOrReplace(new User((long) 111,string,111+"岁",false));
                 setData();
                 break;
         }

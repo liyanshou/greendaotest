@@ -2,6 +2,7 @@ package com.liys.com.utils;
 
 import com.liys.com.gen.DaoMaster;
 import com.liys.com.gen.DaoSession;
+import com.liys.com.gen.DevOpenHelperUpgrade;
 
 /**
  * Created by liys
@@ -30,7 +31,7 @@ public class DaoManager {
 
     public DaoMaster getDaoMaster(){
         if(daoMaster == null){
-            DaoMaster.OpenHelper devOpenHelper= new DaoMaster.DevOpenHelper(LyApplication.getLyApplication(),"Ly_test.db");
+            DevOpenHelperUpgrade devOpenHelper= new DevOpenHelperUpgrade(LyApplication.getLyApplication(),"Ly_test.db");
             daoMaster= new DaoMaster(devOpenHelper.getWritableDatabase());
         }
         return daoMaster;

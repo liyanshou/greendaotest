@@ -23,5 +23,11 @@ public class DevOpenHelperUpgrade extends DaoMaster.OpenHelper {
     public void onUpgrade(Database db, int oldVersion, int newVersion) {
         super.onUpgrade(db, oldVersion, newVersion);
         //做数据库升级的处理
+        if (oldVersion < 7) {
+            //增加一个字段
+//            db.execSQL("ALTER TABLE USER ADD is_stu BIT NOT NULL DEFAULT 0");
+            //增加表
+            DaoMaster.createAllTables(db,true);
+        }
     }
 }

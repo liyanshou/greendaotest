@@ -18,7 +18,7 @@ android {
         }
     }
   greendao{
-      schemaVersion 1
+      schemaVersion 6
       daoPackage 'com.liys.com.gen'
       targetGenDir 'src/main/java'
   }
