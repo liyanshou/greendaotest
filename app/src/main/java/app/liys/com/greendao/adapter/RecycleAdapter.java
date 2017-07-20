@@ -39,7 +39,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.CommView
 
     @Override
     public void onBindViewHolder(CommViewHolder holder, int position) {
-        holder.itemView.setTag(position);
+        holder.itemView.setTag(datas.get(position));
         holder.tvName.setText(datas.get(position).getName());
         holder.tvNum.setText(datas.get(position).getStuNum()+"");
     }
@@ -68,7 +68,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.CommView
     @Override
     public void onClick(View view) {
         if(onItemClickListener != null){
-            onItemClickListener.onItemClick(view, (Integer) view.getTag());
+            onItemClickListener.onItemClick(view, (User) view.getTag());
         }
     }
 
@@ -88,6 +88,6 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.CommView
     }
 
     public  interface OnItemClickListener {
-        void onItemClick(View view , int position);
+        void onItemClick(View view , User user);
     }
 }

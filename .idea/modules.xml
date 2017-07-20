@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://E:\androidWorkspace\greendao\greendaotest\app\app.iml" filepath="E:\androidWorkspace\greendao\greendaotest\app\app.iml" />
-      <module fileurl="file://E:\androidWorkspace\greendao\greendaotest\greenDao.iml" filepath="E:\androidWorkspace\greendao\greendaotest\greenDao.iml" />
-      <module fileurl="file://$PROJECT_DIR$/greendaotest.iml" filepath="$PROJECT_DIR$/greendaotest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/greenDao.iml" filepath="$PROJECT_DIR$/greenDao.iml" />
     </modules>
   </component>
 </project>
